@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   const svg = document.querySelector("svg");
-  if (!svg) return;
+  if (!svg) {
+    console.error("SVG haritası bulunamadı. Lütfen SVG elementinin sayfada olduğundan emin olun.");
+    return;
+  }
 
   // ============================================================
   //  1. CSS STİLLERİ VE MODAL YAPISI EKLE
@@ -10,29 +13,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalHTML = `
     <div id="country-modal" style="
         display: none; position: fixed; z-index: 1000; left: 0; top: 0; 
-        width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);
-        backdrop-filter: blur(5px);
+        width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); /* Daha koyu arka plan */
+        backdrop-filter: blur(5px); transition: opacity 0.3s;
     ">
         <div id="modal-content" style="
-            background-color: #fefefe; margin: 10% auto; padding: 20px; 
-            border: 1px solid #888; width: 80%; max-width: 600px; 
-            border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: relative;
+            background-color: #fefefe; margin: 5% auto; padding: 25px; 
+            border: 1px solid #888; width: 90%; max-width: 800px; /* Büyütülmüş Genişlik */
+            border-radius: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.5); /* Daha belirgin gölge */
+            position: relative; animation: slideDown 0.4s;
         ">
             <span id="close-modal" style="
-                color: #aaa; float: right; font-size: 28px; font-weight: bold;
-                cursor: pointer;
-            ">&times;</span>
-            <h2 id="modal-title" style="color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px;"></h2>
-            <p id="modal-text" style="font-size: 16px; line-height: 1.6; color: #333;"></p>
+                color: #aaa; float: right; font-size: 32px; font-weight: bold;
+                cursor: pointer; transition: color 0.2s;
+            " onmouseover="this.style.color='#f00'" onmouseout="this.style.color='#aaa'">&times;</span>
+            <h2 id="modal-title" style="
+                color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; 
+                margin-top: 0; font-size: 28px;
+            "></h2>
+            <p id="modal-text" style="font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 25px;"></p>
+            
             <video id="modal-video" autoplay muted controls width="100%" style="
-                margin-top: 15px; border-radius: 5px; background: #000;
+                display: block; width: 100%; height: auto; 
+                margin-top: 15px; border-radius: 8px; background: #000;
             ">
                 <source id="video-source" src="" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor.
+                Tarayıcınız video etiketini desteklemiyor veya video dosyası bulunamadı.
             </video>
         </div>
     </div>
+    <style>
+      @keyframes slideDown {
+        from { top: -300px; opacity: 0; }
+        to { top: 0; opacity: 1; }
+      }
+    </style>
   `;
   document.body.insertAdjacentHTML('beforeend', modalHTML);
 
@@ -46,12 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Kapatma Fonksiyonları
   closeModal.onclick = function() {
     modal.style.display = "none";
-    modalVideo.pause();
+    modalVideo.pause(); 
   }
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
-      modalVideo.pause();
+      modalVideo.pause(); 
     }
   }
 
@@ -72,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // ============================================================
-  //  3. ÜLKE BİLGİLERİ (TÜM LİSTE TAMAMLANDI)
+  //  3. ÜLKE BİLGİLERİ VE GÜÇLENDİRİLMİŞ FIXMAP
   // ============================================================
 
   const countryNames = {
@@ -124,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const countryTexts = {
-    af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır.",
+af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır.",
     al:"Arnavutluk: Balkan folkloru ve sıcak kültürel yapısıyla bilinir.",
     dz:"Cezayir: Berberi ve Arap kültürünün birleştiği köklü bir mirasa sahiptir.",
     ad:"Andorra: Pirene dağ kültürü ve küçük topluluk gelenekleriyle ünlüdür.",
@@ -321,9 +335,19 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const fixMap = {
-    turkey:"tr", usa:"us", america:"us",
-    france:"fr", germany:"de",
-    england:"gb", uk:"gb"
+    // Yaygın kullanılan alternatif SVG ID/Class isimlerinin düzeltilmesi:
+    turkey:"tr", 
+    usa:"us", 
+    america:"us",
+    france:"fr", 
+    germany:"de",
+    england:"gb", 
+    uk:"gb",
+    russia:"ru",       // Rusya için yaygın isim
+    china:"cn",        // Çin için yaygın isim
+    australia:"au",    // Avustralya için yaygın isim
+    unitedstates:"us", // ABD'nin tam adı
+    ussr:"ru"          
   };
 
   // ============================================================
@@ -333,26 +357,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const real = document.elementFromPoint(e.clientX, e.clientY);
     const target = real.closest("path, polygon, g");
-    if (!target) return; // Geçerli bir SVG ülke öğesi değilse dur
+    if (!target) return;
 
     const idAttr = (target.getAttribute("id") || "").toLowerCase();
     const classAttr = (target.getAttribute("class") || "").toLowerCase();
     const tokens = (idAttr + " " + classAttr).trim().split(/\s+/).filter(Boolean);
 
-    let found = tokens.find(t => fixMap[t] || countryNames[t]);
-    let rawCode = found || tokens[0] || "";
+    // SVG ID/Class değerini al ve fixMap ile eşleştir
+    let rawCode = tokens.find(t => fixMap[t] || countryNames[t]) || tokens[0] || "";
+    
+    if (!rawCode) return;
+    
     let countryCode = fixMap[rawCode] || rawCode;
 
-    // Ülke kodu bulunamazsa veya geçerli bir kod değilse bir uyarı verilebilir
     if (!countryNames[countryCode]) {
-        console.warn(`Ülke kodu bulunamadı veya eşleştirilemedi: ${countryCode}`);
+        console.warn(`[Tıklama Başarısız]: Ülke kodu bulunamadı veya eşleştirilemedi: ${rawCode} -> ${countryCode}`);
         return;
     }
 
     const name = countryNames[countryCode];
     const text = countryTexts[countryCode] || "Bu ülke için metin henüz eklenmemiş.";
     
-    // Modal içeriğini doldur ve göster
+    // Modal içeriğini doldur
     modalTitle.textContent = name;
     modalText.textContent = text;
     
@@ -360,14 +386,12 @@ document.addEventListener("DOMContentLoaded", function () {
     videoSource.src = `video/${countryCode}.mp4`;
     modalVideo.load();
     
-    // Otomatik oynatmayı (autoplay) sağlamak için:
+    // Otomatik oynatmayı dene (tarayıcı ayarları buna izin vermeyebilir)
     modalVideo.play().catch(error => {
-        // Otomatik oynatma hatası (genellikle sesli olduğu için tarayıcılar engeller)
-        console.log("Video otomatik oynatılamadı, manuel başlatılması gerekebilir.", error);
+        console.log(`Video otomatik oynatılamadı. Lütfen video oynat düğmesine basın. Kod: ${countryCode}`, error);
     });
 
     modal.style.display = "block"; // Modalı göster
-
   });
 
 });
