@@ -202,7 +202,48 @@ af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır
     ga:"Gabon: Afrika'nın en az nüfuslu ülkelerinden olup, büyük ulusal parklara sahiptir.",
     gm:"Gambiya: Batı Afrika'nın en küçük ülkesidir, nehir kenarındaki yaşam kültürüyle bilinir.",
     ge:"Gürcistan: Antik şarap yapımı geleneği ve Kafkas Dağları'nın kültürüyle tanınır.",
-    de:"Almanya: Otomotiv, mühendislik, kültürel festivalleri (Oktoberfest) ve karmaşık tarihiyle ünlüdür.",
+    de:"Almanya:“Sessiz Akşam, Parlak Ekranlar”
+Münih’te, sakin bir apartman dairesinin üçüncü katında Schneider ailesi işten ve okuldan döndükten sonra akşam rutinine giriyordu. Dairede ilk dikkat çeken şey sessizlik değil, ekranların hafif mavi ışığıydı.
+Baba Thomas, mutfak tezgâhına dizilmiş market poşetlerini tarayıp telefondaki alışveriş uygulamasına bir şeyleri işaretliyordu.
+“Yine peynirin fiyatı artmış,” diye mırıldandı.
+Uygulama otomatik fiş taraması yapmıştı bile; Almanya’da dijitalleşmenin avantajları onların evine çoktan yerleşmişti.
+Anne Miriam, salonun bir köşesindeki akıllı hoparlöre dönüp “Licht dimmen” dedi. Işıklar hafifçe kısıldı. Elinde dizüstü bilgisayarı vardı; ertesi günki toplantı için sunum hazırlıyordu. Pandemi döneminden beri haftanın iki günü evden çalışmaya alışmıştı.
+On üç yaşındaki Lina, masanın başında kulaklıklarıyla YouTube’da çizim videoları izlerken bir yandan da tabletinden dijital çizim yapıyordu. Tabletin yanındaki akıllı telefonuna sürekli mesajlar düşüyordu.
+Grup sohbetlerindeki bildirimler onu sürekli bölse de bu, Almanya’daki birçok genç gibi onun için rahatsız edici değil, günün normaliydi.
+Sekiz yaşındaki Max ise oturma odasında Switch’inde oyun oynuyor, ara sıra televizyonla konsol arasında geçiş yapıyordu. Televizyonda Netflix’in menüsü açık kalmıştı.
+Miriam, gözlerini bilgisayardan ayırıp çocuklara seslendi:
+“Yemek on dakika sonra hazır. Lütfen oyunu ve videoları yavaş yavaş bırakın.”
+Lina kulaklığını çıkarmadan, “Bir saniye anne, burayı bitiriyorum,” dedi.
+Max ise oyununu durdurdu ama akıllı hoparlöre seslendi:
+“Timer auf fünf Minuten!”
+Odada beş dakikalık bir zamanlayıcı başladı.
+Thomas güldü.
+“Çocuklar artık her şeyi sesle kontrol ediyor. Bizim zamanımızda böyle değildi.”
+Sofraya oturduklarında bile ekranlar tamamen ortadan kalkmadı. Thomas’ın akıllı saati titreyip yeni bir e-posta bildirimi verdi. Lina gizlice telefonuna baktı, arkadaşları okul gruplarına yeni mesaj bırakmıştı.
+Miriam hafifçe kaşlarını kaldırdı.
+“Lina, lütfen. En azından yemek sırasında kenara koy.”
+Lina biraz isteksizce telefonunu masanın yanındaki dolaba bıraktı.
+“Tamam anne. Ama öğretmen yarınki duyuruyu Telegram’dan gönderecekmiş, kaçırmayayım.”
+Thomas çayı doldururken konuşmaya başladı:
+“Ali bugün iş yerinde yeni otomasyon sistemi kurdu. Artık stok kontrolünü tamamen yazılım yapıyor. Her şey dijitalleşiyor.”
+Miriam başını salladı.
+“Hastanede de öyle. Randevu sistemleri bile tamamen online. İnsan yüzü görmek zorlaştı aslında.”
+Çocuklar sustu; teknoloji onlar için doğal, normaldi. Miriam için ise bazen yorucu bir hızdı.
+Yemekten sonra herkes kendi köşesine çekildi.
+Lina odasına gidip tabletinde çizim yapmaya devam etti. İnce ve güçlü internet bağlantısı sayesinde videolar hiç takılmıyordu.
+Max, arkadaşlarıyla çevrim içi oyun oynamak için konsolunu yeniden açtı.
+Thomas kanepede dizüstü bilgisayarından bankacılık işlemlerini halletti, faturaların çoğu otomatik ödemedeydi.
+Miriam ise bilgisayarındaki sunumu tamamlarken aynı anda telefonundan market teslimat saatini değiştirdi.
+Evin içinde konuşmalar azdı ama iletişim kopuk değildi. Günün yoğunluğu, teknolojiyle birlikte gelişen sessiz bir uyum yaratmıştı.
+Gece yarısına doğru Lina odasından seslendi:
+“Anne, bir şey sorabilir miyim?”
+Miriam odasına gittiğinde Lina yatağında oturmuş, elinde tabletle bir çizimi gösteriyordu.
+“Bunu sergiye göndermeyi düşünüyorum. Sence uygun mu?”
+Miriam’ın yüzü aydınlandı.
+“Harika olmuş! Teknoloji olmasa bu kadar rahat çizemeyecektin, değil mi?”
+Lina gülümsedi.
+“Ama seninle konuşmak daha güzel,” dedi ve tabletini kapattı.
+Ekranlar sonunda sessizleşirken, Schneider ailesi günün en gerçek iletişimini tam da o anda kuruyordu.",
     gh:"Gana: Batı Afrika'nın altın ve kakao zengini, demokratik bir ülkesidir.",
     gr:"Yunanistan: Batı medeniyetinin beşiği, antik felsefe ve Akdeniz adalarıyla tanınır.",
     gd:"Grenada: 'Baharat Adası' olarak bilinir, nutmeg (küçük Hindistan cevizi) üretimiyle öne çıkar.",
@@ -395,3 +436,4 @@ af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır
   });
 
 });
+
