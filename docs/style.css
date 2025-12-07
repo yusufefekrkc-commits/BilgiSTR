@@ -60,8 +60,6 @@ svg g:hover {
   fill: orange !important;
 }
 
-svg path {
-  pointer-events: all !important;
-}
+
 
 
