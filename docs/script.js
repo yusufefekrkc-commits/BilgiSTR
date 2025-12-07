@@ -1,166 +1,532 @@
-document.addEventListener("DOMContentLoaded", function () {
+// ------------------------------------------
+// TÜM ÜLKE KODLARI + ÜLKE İSİMLERİ
+// ------------------------------------------
+const countries = {
+  AF: "Afghanistan",
+  AX: "Aland Islands",
+  AL: "Albania",
+  DZ: "Algeria",
+  AS: "American Samoa",
+  AD: "Andorra",
+  AO: "Angola",
+  AI: "Anguilla",
+  AQ: "Antarctica",
+  AG: "Antigua and Barbuda",
+  AR: "Argentina",
+  AM: "Armenia",
+  AW: "Aruba",
+  AU: "Australia",
+  AT: "Austria",
+  AZ: "Azerbaijan",
+  BS: "Bahamas",
+  BH: "Bahrain",
+  BD: "Bangladesh",
+  BB: "Barbados",
+  BY: "Belarus",
+  BE: "Belgium",
+  BZ: "Belize",
+  BJ: "Benin",
+  BM: "Bermuda",
+  BT: "Bhutan",
+  BO: "Bolivia",
+  BQ: "Bonaire, Sint Eustatius and Saba",
+  BA: "Bosnia and Herzegovina",
+  BW: "Botswana",
+  BV: "Bouvet Island",
+  BR: "Brazil",
+  IO: "British Indian Ocean Territory",
+  BN: "Brunei Darussalam",
+  BG: "Bulgaria",
+  BF: "Burkina Faso",
+  BI: "Burundi",
+  KH: "Cambodia",
+  CM: "Cameroon",
+  CA: "Canada",
+  CV: "Cape Verde",
+  KY: "Cayman Islands",
+  CF: "Central African Republic",
+  TD: "Chad",
+  CL: "Chile",
+  CN: "China",
+  CX: "Christmas Island",
+  CC: "Cocos Islands",
+  CO: "Colombia",
+  KM: "Comoros",
+  CG: "Congo",
+  CD: "Congo, Democratic Republic",
+  CK: "Cook Islands",
+  CR: "Costa Rica",
+  CI: "Côte d'Ivoire",
+  HR: "Croatia",
+  CU: "Cuba",
+  CW: "Curaçao",
+  CY: "Cyprus",
+  CZ: "Czech Republic",
+  DK: "Denmark",
+  DJ: "Djibouti",
+  DM: "Dominica",
+  DO: "Dominican Republic",
+  EC: "Ecuador",
+  EG: "Egypt",
+  SV: "El Salvador",
+  GQ: "Equatorial Guinea",
+  ER: "Eritrea",
+  EE: "Estonia",
+  SZ: "Eswatini",
+  ET: "Ethiopia",
+  FK: "Falkland Islands",
+  FO: "Faroe Islands",
+  FJ: "Fiji",
+  FI: "Finland",
+  FR: "France",
+  GF: "French Guiana",
+  PF: "French Polynesia",
+  TF: "French Southern Territories",
+  GA: "Gabon",
+  GM: "Gambia",
+  GE: "Georgia",
+  DE: "Germany",
+  GH: "Ghana",
+  GI: "Gibraltar",
+  GR: "Greece",
+  GL: "Greenland",
+  GD: "Grenada",
+  GP: "Guadeloupe",
+  GU: "Guam",
+  GT: "Guatemala",
+  GG: "Guernsey",
+  GN: "Guinea",
+  GW: "Guinea-Bissau",
+  GY: "Guyana",
+  HT: "Haiti",
+  HM: "Heard Island and McDonald Islands",
+  VA: "Holy See",
+  HN: "Honduras",
+  HK: "Hong Kong",
+  HU: "Hungary",
+  IS: "Iceland",
+  IN: "India",
+  ID: "Indonesia",
+  IR: "Iran",
+  IQ: "Iraq",
+  IE: "Ireland",
+  IM: "Isle of Man",
+  IL: "Israel",
+  IT: "Italy",
+  JM: "Jamaica",
+  JP: "Japan",
+  JE: "Jersey",
+  JO: "Jordan",
+  KZ: "Kazakhstan",
+  KE: "Kenya",
+  KI: "Kiribati",
+  KP: "North Korea",
+  KR: "South Korea",
+  KW: "Kuwait",
+  KG: "Kyrgyzstan",
+  LA: "Laos",
+  LV: "Latvia",
+  LB: "Lebanon",
+  LS: "Lesotho",
+  LR: "Liberia",
+  LY: "Libya",
+  LI: "Liechtenstein",
+  LT: "Lithuania",
+  LU: "Luxembourg",
+  MO: "Macao",
+  MG: "Madagascar",
+  MW: "Malawi",
+  MY: "Malaysia",
+  MV: "Maldives",
+  ML: "Mali",
+  MT: "Malta",
+  MH: "Marshall Islands",
+  MQ: "Martinique",
+  MR: "Mauritania",
+  MU: "Mauritius",
+  YT: "Mayotte",
+  MX: "Mexico",
+  FM: "Micronesia",
+  MD: "Moldova",
+  MC: "Monaco",
+  MN: "Mongolia",
+  ME: "Montenegro",
+  MS: "Montserrat",
+  MA: "Morocco",
+  MZ: "Mozambique",
+  MM: "Myanmar",
+  NA: "Namibia",
+  NR: "Nauru",
+  NP: "Nepal",
+  NL: "Netherlands",
+  NC: "New Caledonia",
+  NZ: "New Zealand",
+  NI: "Nicaragua",
+  NE: "Niger",
+  NG: "Nigeria",
+  NU: "Niue",
+  NF: "Norfolk Island",
+  MK: "North Macedonia",
+  MP: "Northern Mariana Islands",
+  NO: "Norway",
+  OM: "Oman",
+  PK: "Pakistan",
+  PW: "Palau",
+  PS: "Palestine",
+  PA: "Panama",
+  PG: "Papua New Guinea",
+  PY: "Paraguay",
+  PE: "Peru",
+  PH: "Philippines",
+  PN: "Pitcairn",
+  PL: "Poland",
+  PT: "Portugal",
+  PR: "Puerto Rico",
+  QA: "Qatar",
+  RE: "Réunion",
+  RO: "Romania",
+  RU: "Russia",
+  RW: "Rwanda",
+  BL: "Saint Barthélemy",
+  SH: "Saint Helena",
+  KN: "Saint Kitts and Nevis",
+  LC: "Saint Lucia",
+  MF: "Saint Martin",
+  PM: "Saint Pierre and Miquelon",
+  VC: "Saint Vincent and the Grenadines",
+  WS: "Samoa",
+  SM: "San Marino",
+  ST: "Sao Tome and Principe",
+  SA: "Saudi Arabia",
+  SN: "Senegal",
+  RS: "Serbia",
+  SC: "Seychelles",
+  SL: "Sierra Leone",
+  SG: "Singapore",
+  SX: "Sint Maarten",
+  SK: "Slovakia",
+  SI: "Slovenia",
+  SB: "Solomon Islands",
+  SO: "Somalia",
+  ZA: "South Africa",
+  GS: "South Georgia",
+  SS: "South Sudan",
+  ES: "Spain",
+  LK: "Sri Lanka",
+  SD: "Sudan",
+  SR: "Suriname",
+  SJ: "Svalbard and Jan Mayen",
+  SE: "Sweden",
+  CH: "Switzerland",
+  SY: "Syria",
+  TW: "Taiwan",
+  TJ: "Tajikistan",
+  TZ: "Tanzania",
+  TH: "Thailand",
+  TL: "Timor-Leste",
+  TG: "Togo",
+  TK: "Tokelau",
+  TO: "Tonga",
+  TT: "Trinidad and Tobago",
+  TN: "Tunisia",
+  TR: "Türkiye",
+  TM: "Turkmenistan",
+  TC: "Turks and Caicos Islands",
+  TV: "Tuvalu",
+  UG: "Uganda",
+  UA: "Ukraine",
+  AE: "United Arab Emirates",
+  GB: "United Kingdom",
+  US: "United States",
+  UM: "US Minor Outlying Islands",
+  UY: "Uruguay",
+  UZ: "Uzbekistan",
+  VU: "Vanuatu",
+  VE: "Venezuela",
+  VN: "Vietnam",
+  VG: "British Virgin Islands",
+  VI: "U.S. Virgin Islands",
+  WF: "Wallis and Futuna",
+  EH: "Western Sahara",
+  YE: "Yemen",
+  ZM: "Zambia",
+  ZW: "Zimbabwe"
+};
 
-  const svg = document.querySelector("svg");
-  if (!svg) {
-    console.error("SVG öğesi DOM'da bulunamadı. Lütfen HTML dosyanızdaki <svg> etiketinin varlığını kontrol edin.");
+// ------------------------------------------
+// OTOMATİK METİN OLUŞTURMA
+// ------------------------------------------
+const countryTexts = {
+  AF: "Afganistan hakkında bilgi ve video.",
+  AX: "Aland Adaları hakkında bilgi ve video.",
+  AL: "Arnavutluk hakkında bilgi ve video.",
+  DZ: "Cezayir hakkında bilgi ve video.",
+  AS: "Amerikan Samoası hakkında bilgi ve video.",
+  AD: "Andorra hakkında bilgi ve video.",
+  AO: "Angola hakkında bilgi ve video.",
+  AI: "Anguilla hakkında bilgi ve video.",
+  AQ: "Antarktika hakkında bilgi ve video.",
+  AG: "Antigua ve Barbuda hakkında bilgi ve video.",
+  AR: "Arjantin hakkında bilgi ve video.",
+  AM: "Ermenistan hakkında bilgi ve video.",
+  AW: "Aruba hakkında bilgi ve video.",
+  AU: "Avustralya hakkında bilgi ve video.",
+  AT: "Avusturya hakkında bilgi ve video.",
+  AZ: "Azerbaycan hakkında bilgi ve video.",
+  BS: "Bahamalar hakkında bilgi ve video.",
+  BH: "Bahreyn hakkında bilgi ve video.",
+  BD: "Bangladeş hakkında bilgi ve video.",
+  BB: "Barbados hakkında bilgi ve video.",
+  BY: "Belarus hakkında bilgi ve video.",
+  BE: "Belçika hakkında bilgi ve video.",
+  BZ: "Belize hakkında bilgi ve video.",
+  BJ: "Benin hakkında bilgi ve video.",
+  BM: "Bermuda hakkında bilgi ve video.",
+  BT: "Bhutan hakkında bilgi ve video.",
+  BO: "Bolivya hakkında bilgi ve video.",
+  BQ: "Bonaire hakkında bilgi ve video.",
+  BA: "Bosna Hersek hakkında bilgi ve video.",
+  BW: "Botsvana hakkında bilgi ve video.",
+  BV: "Bouvet Adası hakkında bilgi ve video.",
+  BR: "Brezilya hakkında bilgi ve video.",
+  IO: "Britanya Hint Okyanusu Toprakları hakkında bilgi ve video.",
+  BN: "Brunei hakkında bilgi ve video.",
+  BG: "Bulgaristan hakkında bilgi ve video.",
+  BF: "Burkina Faso hakkında bilgi ve video.",
+  BI: "Burundi hakkında bilgi ve video.",
+  KH: "Kamboçya hakkında bilgi ve video.",
+  CM: "Kamerun hakkında bilgi ve video.",
+  CA: "Kanada hakkında bilgi ve video.",
+  CV: "Yeşil Burun Adaları hakkında bilgi ve video.",
+  KY: "Cayman Adaları hakkında bilgi ve video.",
+  CF: "Orta Afrika Cumhuriyeti hakkında bilgi ve video.",
+  TD: "Çad hakkında bilgi ve video.",
+  CL: "Şili hakkında bilgi ve video.",
+  CN: "Çin hakkında bilgi ve video.",
+  CX: "Christmas Adası hakkında bilgi ve video.",
+  CC: "Cocos Adaları hakkında bilgi ve video.",
+  CO: "Kolombiya hakkında bilgi ve video.",
+  KM: "Komorlar hakkında bilgi ve video.",
+  CG: "Kongo hakkında bilgi ve video.",
+  CD: "Demokratik Kongo Cumhuriyeti hakkında bilgi ve video.",
+  CK: "Cook Adaları hakkında bilgi ve video.",
+  CR: "Kosta Rika hakkında bilgi ve video.",
+  CI: "Fildişi Sahili hakkında bilgi ve video.",
+  HR: "Hırvatistan hakkında bilgi ve video.",
+  CU: "Küba hakkında bilgi ve video.",
+  CW: "Curaçao hakkında bilgi ve video.",
+  CY: "Kıbrıs hakkında bilgi ve video.",
+  CZ: "Çekya hakkında bilgi ve video.",
+  DK: "Danimarka hakkında bilgi ve video.",
+  DJ: "Cibuti hakkında bilgi ve video.",
+  DM: "Dominika hakkında bilgi ve video.",
+  DO: "Dominik Cumhuriyeti hakkında bilgi ve video.",
+  EC: "Ekvador hakkında bilgi ve video.",
+  EG: "Mısır hakkında bilgi ve video.",
+  SV: "El Salvador hakkında bilgi ve video.",
+  GQ: "Ekvator Ginesi hakkında bilgi ve video.",
+  ER: "Eritre hakkında bilgi ve video.",
+  EE: "Estonya hakkında bilgi ve video.",
+  SZ: "Esvatini hakkında bilgi ve video.",
+  ET: "Etiyopya hakkında bilgi ve video.",
+  FK: "Falkland Adaları hakkında bilgi ve video.",
+  FO: "Faroe Adaları hakkında bilgi ve video.",
+  FJ: "Fiji hakkında bilgi ve video.",
+  FI: "Finlandiya hakkında bilgi ve video.",
+  FR: "Fransa hakkında bilgi ve video.",
+  GF: "Fransız Guyanası hakkında bilgi ve video.",
+  PF: "Fransız Polinezyası hakkında bilgi ve video.",
+  TF: "Fransız Güney Toprakları hakkında bilgi ve video.",
+  GA: "Gabon hakkında bilgi ve video.",
+  GM: "Gambiya hakkında bilgi ve video.",
+  GE: "Gürcistan hakkında bilgi ve video.",
+  DE: "Almanya hakkında bilgi ve video.",
+  GH: "Gana hakkında bilgi ve video.",
+  GI: "Cebelitarık hakkında bilgi ve video.",
+  GR: "Yunanistan hakkında bilgi ve video.",
+  GL: "Grönland hakkında bilgi ve video.",
+  GD: "Grenada hakkında bilgi ve video.",
+  GP: "Guadeloupe hakkında bilgi ve video.",
+  GU: "Guam hakkında bilgi ve video.",
+  GT: "Guatemala hakkında bilgi ve video.",
+  GG: "Guernsey hakkında bilgi ve video.",
+  GN: "Gine hakkında bilgi ve video.",
+  GW: "Gine-Bissau hakkında bilgi ve video.",
+  GY: "Guyana hakkında bilgi ve video.",
+  HT: "Haiti hakkında bilgi ve video.",
+  HM: "Heard ve McDonald Adaları hakkında bilgi ve video.",
+  VA: "Vatikan hakkında bilgi ve video.",
+  HN: "Honduras hakkında bilgi ve video.",
+  HK: "Hong Kong hakkında bilgi ve video.",
+  HU: "Macaristan hakkında bilgi ve video.",
+  IS: "İzlanda hakkında bilgi ve video.",
+  IN: "Hindistan hakkında bilgi ve video.",
+  ID: "Endonezya hakkında bilgi ve video.",
+  IR: "İran hakkında bilgi ve video.",
+  IQ: "Irak hakkında bilgi ve video.",
+  IE: "İrlanda hakkında bilgi ve video.",
+  IM: "Man Adası hakkında bilgi ve video.",
+  IL: "İsrail hakkında bilgi ve video.",
+  IT: "İtalya hakkında bilgi ve video.",
+  JM: "Jamaika hakkında bilgi ve video.",
+  JP: "Japonya hakkında bilgi ve video.",
+  JE: "Jersey hakkında bilgi ve video.",
+  JO: "Ürdün hakkında bilgi ve video.",
+  KZ: "Kazakistan hakkında bilgi ve video.",
+  KE: "Kenya hakkında bilgi ve video.",
+  KI: "Kiribati hakkında bilgi ve video.",
+  KP: "Kuzey Kore hakkında bilgi ve video.",
+  KR: "Güney Kore hakkında bilgi ve video.",
+  KW: "Kuveyt hakkında bilgi ve video.",
+  KG: "Kırgızistan hakkında bilgi ve video.",
+  LA: "Laos hakkında bilgi ve video.",
+  LV: "Letonya hakkında bilgi ve video.",
+  LB: "Lübnan hakkında bilgi ve video.",
+  LS: "Lesotho hakkında bilgi ve video.",
+  LR: "Liberya hakkında bilgi ve video.",
+  LY: "Libya hakkında bilgi ve video.",
+  LI: "Lihtenştayn hakkında bilgi ve video.",
+  LT: "Litvanya hakkında bilgi ve video.",
+  LU: "Lüksemburg hakkında bilgi ve video.",
+  MO: "Makao hakkında bilgi ve video.",
+  MG: "Madagaskar hakkında bilgi ve video.",
+  MW: "Malavi hakkında bilgi ve video.",
+  MY: "Malezya hakkında bilgi ve video.",
+  MV: "Maldivler hakkında bilgi ve video.",
+  ML: "Mali hakkında bilgi ve video.",
+  MT: "Malta hakkında bilgi ve video.",
+  MH: "Marshall Adaları hakkında bilgi ve video.",
+  MQ: "Martinik hakkında bilgi ve video.",
+  MR: "Moritanya hakkında bilgi ve video.",
+  MU: "Mauritius hakkında bilgi ve video.",
+  YT: "Mayotte hakkında bilgi ve video.",
+  MX: "Meksika hakkında bilgi ve video.",
+  FM: "Mikronezya hakkında bilgi ve video.",
+  MD: "Moldova hakkında bilgi ve video.",
+  MC: "Monako hakkında bilgi ve video.",
+  MN: "Moğolistan hakkında bilgi ve video.",
+  ME: "Karadağ hakkında bilgi ve video.",
+  MS: "Montserrat hakkında bilgi ve video.",
+  MA: "Fas hakkında bilgi ve video.",
+  MZ: "Mozambik hakkında bilgi ve video.",
+  MM: "Myanmar hakkında bilgi ve video.",
+  NA: "Namibya hakkında bilgi ve video.",
+  NR: "Nauru hakkında bilgi ve video.",
+  NP: "Nepal hakkında bilgi ve video.",
+  NL: "Hollanda hakkında bilgi ve video.",
+  NC: "Yeni Kaledonya hakkında bilgi ve video.",
+  NZ: "Yeni Zelanda hakkında bilgi ve video.",
+  NI: "Nikaragua hakkında bilgi ve video.",
+  NE: "Nijer hakkında bilgi ve video.",
+  NG: "Nijerya hakkında bilgi ve video.",
+  NU: "Niue hakkında bilgi ve video.",
+  NF: "Norfolk Adası hakkında bilgi ve video.",
+  MK: "Kuzey Makedonya hakkında bilgi ve video.",
+  MP: "Kuzey Mariana Adaları hakkında bilgi ve video.",
+  NO: "Norveç hakkında bilgi ve video.",
+  OM: "Umman hakkında bilgi ve video.",
+  PK: "Pakistan hakkında bilgi ve video.",
+  PW: "Palau hakkında bilgi ve video.",
+  PS: "Filistin hakkında bilgi ve video.",
+  PA: "Panama hakkında bilgi ve video.",
+  PG: "Papua Yeni Gine hakkında bilgi ve video.",
+  PY: "Paraguay hakkında bilgi ve video.",
+  PE: "Peru hakkında bilgi ve video.",
+  PH: "Filipinler hakkında bilgi ve video.",
+  PN: "Pitcairn Adaları hakkında bilgi ve video.",
+  PL: "Polonya hakkında bilgi ve video.",
+  PT: "Portekiz hakkında bilgi ve video.",
+  PR: "Porto Riko hakkında bilgi ve video.",
+  QA: "Katar hakkında bilgi ve video.",
+  RE: "Réunion hakkında bilgi ve video.",
+  RO: "Romanya hakkında bilgi ve video.",
+  RU: "Rusya hakkında bilgi ve video.",
+  RW: "Ruanda hakkında bilgi ve video.",
+  BL: "Saint Barthélemy hakkında bilgi ve video.",
+  SH: "Saint Helena hakkında bilgi ve video.",
+  KN: "Saint Kitts ve Nevis hakkında bilgi ve video.",
+  LC: "Saint Lucia hakkında bilgi ve video.",
+  MF: "Saint Martin hakkında bilgi ve video.",
+  PM: "Saint Pierre ve Miquelon hakkında bilgi ve video.",
+  VC: "Saint Vincent ve Grenadinler hakkında bilgi ve video.",
+  WS: "Samoa hakkında bilgi ve video.",
+  SM: "San Marino hakkında bilgi ve video.",
+  ST: "Sao Tome ve Principe hakkında bilgi ve video.",
+  SA: "Suudi Arabistan hakkında bilgi ve video.",
+  SN: "Senegal hakkında bilgi ve video.",
+  RS: "Sırbistan hakkında bilgi ve video.",
+  SC: "Seyşeller hakkında bilgi ve video.",
+  SL: "Sierra Leone hakkında bilgi ve video.",
+  SG: "Singapur hakkında bilgi ve video.",
+  SX: "Sint Maarten hakkında bilgi ve video.",
+  SK: "Slovakya hakkında bilgi ve video.",
+  SI: "Slovenya hakkında bilgi ve video.",
+  SB: "Solomon Adaları hakkında bilgi ve video.",
+  SO: "Somali hakkında bilgi ve video.",
+  ZA: "Güney Afrika hakkında bilgi ve video.",
+  GS: "Güney Georgia hakkında bilgi ve video.",
+  SS: "Güney Sudan hakkında bilgi ve video.",
+  ES: "İspanya hakkında bilgi ve video.",
+  LK: "Sri Lanka hakkında bilgi ve video.",
+  SD: "Sudan hakkında bilgi ve video.",
+  SR: "Surinam hakkında bilgi ve video.",
+  SJ: "Svalbard ve Jan Mayen hakkında bilgi ve video.",
+  SE: "İsveç hakkında bilgi ve video.",
+  CH: "İsviçre hakkında bilgi ve video.",
+  SY: "Suriye hakkında bilgi ve video.",
+  TW: "Tayvan hakkında bilgi ve video.",
+  TJ: "Tacikistan hakkında bilgi ve video.",
+  TZ: "Tanzanya hakkında bilgi ve video.",
+  TH: "Tayland hakkında bilgi ve video.",
+  TL: "Doğu Timor hakkında bilgi ve video.",
+  TG: "Togo hakkında bilgi ve video.",
+  TK: "Tokelau hakkında bilgi ve video.",
+  TO: "Tonga hakkında bilgi ve video.",
+  TT: "Trinidad ve Tobago hakkında bilgi ve video.",
+  TN: "Tunus hakkında bilgi ve video.",
+  TR: "Türkiye hakkında bilgi ve video.",
+  TM: "Türkmenistan hakkında bilgi ve video.",
+  TC: "Turks ve Caicos Adaları hakkında bilgi ve video.",
+  TV: "Tuvalu hakkında bilgi ve video.",
+  UG: "Uganda hakkında bilgi ve video.",
+  UA: "Ukrayna hakkında bilgi ve video.",
+  AE: "Birleşik Arap Emirlikleri hakkında bilgi ve video.",
+  GB: "Birleşik Krallık hakkında bilgi ve video.",
+  US: "Amerika Birleşik Devletleri hakkında bilgi ve video.",
+  UM: "ABD Küçük Dış Adaları hakkında bilgi ve video.",
+  UY: "Uruguay hakkında bilgi ve video.",
+  UZ: "Özbekistan hakkında bilgi ve video.",
+  VU: "Vanuatu hakkında bilgi ve video.",
+  VE: "Venezuela hakkında bilgi ve video.",
+  VN: "Vietnam hakkında bilgi ve video.",
+  VG: "Britanya Virjin Adaları hakkında bilgi ve video.",
+  VI: "ABD Virjin Adaları hakkında bilgi ve video.",
+  WF: "Wallis ve Futuna hakkında bilgi ve video.",
+  EH: "Batı Sahra hakkında bilgi ve video.",
+  YE: "Yemen hakkında bilgi ve video.",
+  ZM: "Zambiya hakkında bilgi ve video.",
+  ZW: "Zimbabve hakkında bilgi ve video."
+};
+
+
+// ------------------------------------------
+// ÜLKE BİLGİSİ GÖSTERME FONKSİYONU
+// ------------------------------------------
+function showCountryInfo(code) {
+  const name = countries[code];
+  const text = countryTexts[code];
+
+  if (!name) {
+    console.log("❌ Geçersiz ülke kodu!");
     return;
   }
 
-  // 1. ÜLKE ADLARI VE KODLARI (ISO 3166-1 alpha-2) - TAM LİSTE
-  const countryNames = {
-    "tr": "Türkiye", "us": "Amerika Birleşik Devletleri", "ca": "Kanada", "ir": "İran", "iq": "Irak", 
-    "de": "Almanya", "fr": "Fransa", "gb": "Birleşik Krallık", "es": "İspanya", "it": "İtalya",
-    "ru": "Rusya Federasyonu", "cn": "Çin", "Jp": "Japonya", "au": "Avustralya", "br": "Brezilya",
-    "mx": "Meksika", "in": "Hindistan", "sa": "Suudi Arabistan", "eg": "Mısır", "za": "Güney Afrika",
-    // Tüm diğer ülkeler tamamlanmıştır:
-    "ad": "Andorra", "ae": "Birleşik Arap Emirlikleri", "af": "Afganistan", "ag": "Antigua ve Barbuda", "ai": "Anguilla", "al": "Arnavutluk", "am": "Ermenistan", "ao": "Angola", "aq": "Antarktika", "ar": "Arjantin", "as": "Amerikan Samoası", "at": "Avusturya", "aw": "Aruba", "ax": "Aland Adaları", "az": "Azerbaycan",
-    "ba": "Bosna-Hersek", "bb": "Barbados", "bd": "Bangladeş", "be": "Belçika", "bf": "Burkina Faso", "bg": "Bulgaristan", "bh": "Bahreyn", "bi": "Burundi", "bj": "Benin", "bl": "Saint Barthelemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivya", "bq": "Karayip Hollandası", "bs": "Bahamalar", "bt": "Bhutan", "bv": "Bouvet Adası", "bw": "Botsvana", "by": "Belarus", "bz": "Belize",
-    "cc": "Cocos (Keeling) Adaları", "cd": "Kongo Demokratik Cumhuriyeti", "cf": "Orta Afrika Cumhuriyeti", "cg": "Kongo", "ch": "İsviçre", "ci": "Fildişi Sahili", "ck": "Cook Adaları", "cl": "Şili", "cm": "Kamerun", "co": "Kolombiya", "cr": "Kosta Rika", "cu": "Küba", "cv": "Cape Verde", "cw": "Curaçao", "cx": "Christmas Adası", "cy": "Kıbrıs", "cz": "Çekya",
-    "dj": "Cibuti", "dk": "Danimarka", "dm": "Dominika", "do": "Dominik Cumhuriyeti", "dz": "Cezayir",
-    "ec": "Ekvador", "ee": "Estonya", "eh": "Batı Sahra", "er": "Eritre", "et": "Etiyopya",
-    "fi": "Finlandiya", "fj": "Fiji", "fk": "Falkland Adaları", "fm": "Mikronezya", "fo": "Faroe Adaları",
-    "ga": "Gabon", "gd": "Grenada", "ge": "Gürcistan", "gf": "Fransız Guyanası", "gg": "Guernsey", "gh": "Gana", "gi": "Cebelitarık", "gl": "Grönland", "gm": "Gambiya", "gn": "Gine", "gp": "Guadeloupe", "gq": "Ekvator Ginesi", "gr": "Yunanistan", "gs": "Güney Georgia ve Güney Sandwich Adaları", "gt": "Guatemala", "gu": "Guam", "gw": "Gine-Bissau", "gy": "Guyana",
-    "hk": "Hong Kong", "hm": "Heard Adası ve McDonald Adaları", "hn": "Honduras", "hr": "Hırvatistan", "ht": "Haiti", "hu": "Macaristan",
-    "id": "Endonezya", "ie": "İrlanda", "il": "İsrail", "im": "Man Adası", "io": "Britanya Hint Okyanusu Toprakları", "is": "İzlanda",
-    "je": "Jersey", "jm": "Jamaika", "jo": "Ürdün", "ke": "Kenya", "kg": "Kırgızistan", "kh": "Kamboçya", "ki": "Kiribati", "km": "Komorlar", "kn": "Saint Kitts ve Nevis", "kp": "Kuzey Kore", "kr": "Güney Kore", "kw": "Kuveyt", "ky": "Cayman Adaları", "kz": "Kazakistan",
-    "la": "Laos", "lb": "Lübnan", "lc": "Saint Lucia", "li": "Lihtenştayn", "lk": "Sri Lanka", "lr": "Liberya", "ls": "Lesoto", "lt": "Litvanya", "lu": "Lüksemburg", "lv": "Letonya", "ly": "Libya",
-    "ma": "Fas", "mc": "Monako", "md": "Moldova", "me": "Karadağ", "mf": "Saint Martin (Fransız Bölgesi)", "mg": "Madagaskar", "mh": "Marshall Adaları", "mk": "Kuzey Makedonya", "ml": "Mali", "mm": "Myanmar", "mn": "Moğolistan", "mo": "Makao", "mp": "Kuzey Mariana Adaları", "mq": "Martinik", "mr": "Moritanya", "ms": "Montserrat", "mt": "Malta", "mu": "Mauritius", "mv": "Maldivler", "mw": "Malavi", "mz": "Mozambik",
-    "na": "Namibya", "nc": "Yeni Kaledonya", "ne": "Nijer", "nf": "Norfolk Adası", "ng": "Nijerya", "ni": "Nikaragua", "nl": "Hollanda", "no": "Norveç", "np": "Nepal", "nr": "Nauru", "nu": "Niue", "nz": "Yeni Zelanda",
-    "om": "Umman",
-    "pa": "Panama", "pe": "Peru", "pf": "Fransız Polinezyası", "pg": "Papua Yeni Gine", "ph": "Filipinler", "pk": "Pakistan", "pl": "Polonya", "pm": "Saint Pierre ve Miquelon", "pn": "Pitcairn Adaları", "pr": "Porto Riko", "ps": "Filistin", "pt": "Portekiz", "pw": "Palau", "py": "Paraguay",
-    "qa": "Katar",
-    "re": "Reunion", "ro": "Romanya", "rs": "Sırbistan", "rw": "Ruanda",
-    "sb": "Solomon Adaları", "sc": "Seyşeller", "sd": "Sudan", "se": "İsveç", "sg": "Singapur", "sh": "Saint Helena, Ascension ve Tristan da Cunha", "si": "Slovenya", "sj": "Svalbard ve Jan Mayen", "sk": "Slovakya", "sl": "Sierra Leone", "sm": "San Marino", "sn": "Senegal", "so": "Somali", "sr": "Surinam", "ss": "Güney Sudan", "st": "Sao Tome ve Principe", "sv": "El Salvador", "sx": "Sint Maarten (Hollanda Bölgesi)", "sy": "Suriye", "sz": "Esvatini",
-    "tc": "Turks ve Caicos Adaları", "td": "Çad", "tf": "Fransız Güney Toprakları", "tg": "Togo", "th": "Tayland", "tj": "Tacikistan", "tk": "Tokelau", "tl": "Doğu Timor", "tm": "Türkmenistan", "tn": "Tunus", "to": "Tonga", "tv": "Tuvalu", "tw": "Tayvan", "tz": "Tanzanya",
-    "ua": "Ukrayna", "ug": "Uganda", "um": "ABD Küçük Dış Adaları", "uy": "Uruguay", "uz": "Özbekistan",
-    "va": "Vatikan", "vc": "Saint Vincent ve Grenadinler", "ve": "Venezuela", "vg": "Britanya Virjin Adaları", "vi": "ABD Virjin Adaları", "vn": "Vietnam", "vu": "Vanuatu",
-    "wf": "Wallis ve Futuna", "ws": "Samoa",
-    "ye": "Yemen", "yt": "Mayotte",
-    "zm": "Zambiya", "zw": "Zimbabve"
-  };
+  console.log("🌍 Ülke:", name);
+  console.log("📄 Metin:", text);
+}
 
-  // 2. ÜLKE BİLGİ METİNLERİ
-  const countryTexts = {
-    "tr": "Türkiye, Asya ve Avrupa kıtalarını birleştiren stratejik konumuyla bilinir. Zengin tarihi, kültürel çeşitliliği ve doğal güzellikleriyle öne çıkar. Başkenti Ankara'dır, ancak en büyük şehri ve kültür merkezi İstanbul'dur.",
-    "us": "Amerika Birleşik Devletleri, 50 eyaletten oluşan federal bir cumhuriyettir. Dünya ekonomisinde, teknolojide ve kültürde önemli bir rol oynar. Başkenti Washington D.C.'dir.",
-    "ca": "Kanada, yüzölçümü bakımından dünyanın ikinci en büyük ülkesidir. Doğal kaynakları ve geniş, vahşi doğası ile ünlüdür. Resmi dilleri İngilizce ve Fransızca'dır.",
-    "de": "Almanya, Avrupa Birliği'nin kurucu üyelerindendir ve kıtanın en büyük ekonomisine sahiptir. Başkenti Berlin'dir.",
-    "fr": "Fransa, kültürü, sanatı, mutfağı ve modasıyla dünya çapında tanınır. Başkenti Paris, 'Işık Şehri' olarak bilinir.",
-    "gb": "Birleşik Krallık; İngiltere, İskoçya, Galler ve Kuzey İrlanda'dan oluşur. Başkenti Londra, küresel bir finans merkezidir.",
-    "es": "İspanya, zengin kültürü, Flamenko müziği ve dansı, boğa güreşleri ve Akdeniz mutfağıyla meşhurdur. Başkenti Madrid'dir.",
-    "it": "İtalya, Roma İmparatorluğu'nun beşiği, Rönesans'ın doğum yeridir ve dünya sanat ve mimarisinin merkezlerindendir. Başkenti Roma'dır.",
-    "ru": "Rusya, dünyanın en büyük ülkesidir ve geniş coğrafyası nedeniyle çok çeşitli iklim ve kültürlere sahiptir. Başkenti Moskova'dır.",
-    "cn": "Çin Halk Cumhuriyeti, dünyanın en kalabalık ülkesidir ve binlerce yıllık kesintisiz bir tarihe sahiptir. Başkenti Pekin'dir.",
-    "jp": "Japonya, Pasifik Okyanusu'nda bir ada ülkesidir. Yüksek teknoloji, geleneksel sanatlar ve eşsiz kültürüyle bilinir. Başkenti Tokyo'dur.",
-    "au": "Avustralya, kendine has vahşi yaşamı ve geniş çölleriyle bilinen bir ada kıtasıdır. Başkenti Canberra'dır.",
-    "br": "Brezilya, Güney Amerika'nın en büyük ülkesidir. Amazon yağmur ormanlarına, karnavallara ve futbol kültürüne sahiptir. Resmi dili Portekizce'dir.",
-    "mx": "Meksika, antik Maya ve Aztek medeniyetlerinin mirasını taşır. Zengin bir mutfak ve canlı bir kültüre sahiptir. Başkenti Meksiko'dur.",
-    "in": "Hindistan, dünyanın ikinci en kalabalık ülkesidir. Zengin manevi tarihi, kültürel çeşitliliği ve Bollywood sinemasıyla öne çıkar. Başkenti Yeni Delhi'dir.",
-    "sa": "Suudi Arabistan, Arap Yarımadası'nda yer alır ve İslam'ın iki kutsal şehrine (Mekke ve Medine) ev sahipliği yapar. Başkenti Riyad'dır.",
-    "eg": "Mısır, köklü antik uygarlığı ve Giza piramitleriyle ünlüdür. Nil Nehri ülkenin can damarıdır. Başkenti Kahire'dir.",
-    "za": "Güney Afrika, çeşitli kültürleri, dilleri ve çarpıcı doğal güzellikleriyle 'Gökkuşağı Ulusu' olarak bilinir. Üç farklı başkenti (Pretoria, Cape Town, Bloemfontein) vardır.",
-    // Diğer tüm ülkelerin metinleri de bu blokta yer almalıdır.
-  };
-
-
-  // 3. Kod Düzeltme Haritası (fixMap) - SVG'deki uzun isimleri 2 harfli kodlara eşler
-  const fixMap = {
-    turkey: "tr", 
-    usa: "us", 
-    america: "us", 
-    "united states": "us",
-    "united_states": "us",
-    "United States": "us", // Tam isim eşleşmesi
-    canada: "ca", 
-    france: "fr", 
-    germany: "de", 
-    england: "gb", 
-    uk: "gb",
-  };
-
-  // 4. SVG Tıklama Olayı Dinleyicisi
-  svg.addEventListener("click", function (e) {
-    let target = e.target.closest("path, polygon, g");
-    if (!target) return;
-
-    // Tıklanan öğenin ID ve Class niteliklerini al
-    const idAttr = (target.getAttribute("id") || "").toLowerCase();
-    const classAttr = (target.getAttribute("class") || ""); 
-    
-    // Olası ülke adlarını/kodlarını çıkar
-    const tokens = (idAttr + " " + classAttr.toLowerCase()).trim().split(/\s+/).filter(Boolean);
-    tokens.push(classAttr); 
-
-    // Eşleşen token'ı fixMap'te veya doğrudan 2 harfli kod olarak ara
-    let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t.toLowerCase()]));
-    
-    let rawCode = foundToken || tokens[0] || "";
-    
-    // Ülke kodunu belirle
-    let countryCode = fixMap[rawCode] || rawCode.toLowerCase(); 
-    
-    if (!countryCode || !countryNames[countryCode]) {
-        console.warn(`Ülke kodu bulunamadı veya tanınmadı. Tıklanan öğenin ID: "${idAttr}", Class: "${classAttr}". Lütfen SVG yapısını kontrol edin.`);
-        return; 
-    }
-
-    const name = countryNames[countryCode];
-    const text = countryTexts[countryCode] || `**${name}** için henüz detaylı bilgi metni girilmemiştir. Lütfen bu bilgiyi daha sonra kontrol edin.`; 
-
-    // -------------------------------
-    // Yeni Sekme Açma İşlemi 
-    // -------------------------------
-    const newTab = window.open("", "_blank");
-    
-    if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
-        alert("Tarayıcınız pop-up pencerelerini engelledi. Lütfen bu site için izin verin.");
-        return;
-    }
-
-    const videoFileName = countryCode; 
-
-    newTab.document.write(`
-      <html>
-      <head>
-        <title>${name} Bilgi ve Video</title>
-        <style>
-          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 25px; background:#f0f2f5; color: #333; }
-          .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-          h1 { color: #007bff; margin-top: 0; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
-          p { font-size: 16px; line-height: 1.7; margin-bottom: 20px; }
-          video { width: 100%; height: auto; margin-top: 15px; border-radius: 6px; }
-          .closeButton {
-            display: inline-block;
-            padding: 10px 18px;
-            background: #6c757d; 
-            color: white;
-            font-size: 14px;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: background 0.3s;
-          }
-          .closeButton:hover { background: #5a6268; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <button class="closeButton" onclick="window.close()">✕ Sekmeyi Kapat</button>
-          <h1>${name} 🗺️</h1>
-          <p>${text}</p>
-          <h2>Video Galeri</h2>
-          <video id="countryVideo" autoplay muted controls>
-            <source src="video/${videoFileName}.mp4" type="video/mp4">
-            Tarayıcınız video etiketini desteklemiyor veya video dosyası bulunamadı: **video/${videoFileName}.mp4**
-          </video>
-        </div>
-      </body>
-      </html>
-    `);
-    newTab.document.close();
-  });
-
-});
+// ------------------------------------------
+// ÖRNEK KULLANIM
+// ------------------------------------------
+showCountryInfo("TR");
 
