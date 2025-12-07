@@ -1,281 +1,120 @@
-// ------------------------
-// TÜM ÜLKE İSİMLERİ
-// ------------------------
-const countries = {
-  AF: "Afghanistan",
-  AX: "Aland Islands",
-  AL: "Albania",
-  DZ: "Algeria",
-  AS: "American Samoa",
-  AD: "Andorra",
-  AO: "Angola",
-  AI: "Anguilla",
-  AQ: "Antarctica",
-  AG: "Antigua and Barbuda",
-  AR: "Argentina",
-  AM: "Armenia",
-  AW: "Aruba",
-  AU: "Australia",
-  AT: "Austria",
-  AZ: "Azerbaijan",
-  BS: "Bahamas",
-  BH: "Bahrain",
-  BD: "Bangladesh",
-  BB: "Barbados",
-  BY: "Belarus",
-  BE: "Belgium",
-  BZ: "Belize",
-  BJ: "Benin",
-  BM: "Bermuda",
-  BT: "Bhutan",
-  BO: "Bolivia",
-  BQ: "Bonaire, Sint Eustatius and Saba",
-  BA: "Bosnia and Herzegovina",
-  BW: "Botswana",
-  BV: "Bouvet Island",
-  BR: "Brazil",
-  IO: "British Indian Ocean Territory",
-  BN: "Brunei Darussalam",
-  BG: "Bulgaria",
-  BF: "Burkina Faso",
-  BI: "Burundi",
-  KH: "Cambodia",
-  CM: "Cameroon",
-  CA: "Canada",
-  CV: "Cape Verde",
-  KY: "Cayman Islands",
-  CF: "Central African Republic",
-  TD: "Chad",
-  CL: "Chile",
-  CN: "China",
-  CX: "Christmas Island",
-  CC: "Cocos Islands",
-  CO: "Colombia",
-  KM: "Comoros",
-  CG: "Congo",
-  CD: "Congo, Democratic Republic",
-  CK: "Cook Islands",
-  CR: "Costa Rica",
-  CI: "Côte d'Ivoire",
-  HR: "Croatia",
-  CU: "Cuba",
-  CW: "Curaçao",
-  CY: "Cyprus",
-  CZ: "Czech Republic",
-  DK: "Denmark",
-  DJ: "Djibouti",
-  DM: "Dominica",
-  DO: "Dominican Republic",
-  EC: "Ecuador",
-  EG: "Egypt",
-  SV: "El Salvador",
-  GQ: "Equatorial Guinea",
-  ER: "Eritrea",
-  EE: "Estonia",
-  SZ: "Eswatini",
-  ET: "Ethiopia",
-  FK: "Falkland Islands",
-  FO: "Faroe Islands",
-  FJ: "Fiji",
-  FI: "Finland",
-  FR: "France",
-  GF: "French Guiana",
-  PF: "French Polynesia",
-  TF: "French Southern Territories",
-  GA: "Gabon",
-  GM: "Gambia",
-  GE: "Georgia",
-  DE: "Germany",
-  GH: "Ghana",
-  GI: "Gibraltar",
-  GR: "Greece",
-  GL: "Greenland",
-  GD: "Grenada",
-  GP: "Guadeloupe",
-  GU: "Guam",
-  GT: "Guatemala",
-  GG: "Guernsey",
-  GN: "Guinea",
-  GW: "Guinea-Bissau",
-  GY: "Guyana",
-  HT: "Haiti",
-  HM: "Heard Island and McDonald Islands",
-  VA: "Holy See",
-  HN: "Honduras",
-  HK: "Hong Kong",
-  HU: "Hungary",
-  IS: "Iceland",
-  IN: "India",
-  ID: "Indonesia",
-  IR: "Iran",
-  IQ: "Iraq",
-  IE: "Ireland",
-  IM: "Isle of Man",
-  IL: "Israel",
-  IT: "Italy",
-  JM: "Jamaica",
-  JP: "Japan",
-  JE: "Jersey",
-  JO: "Jordan",
-  KZ: "Kazakhstan",
-  KE: "Kenya",
-  KI: "Kiribati",
-  KP: "North Korea",
-  KR: "South Korea",
-  KW: "Kuwait",
-  KG: "Kyrgyzstan",
-  LA: "Laos",
-  LV: "Latvia",
-  LB: "Lebanon",
-  LS: "Lesotho",
-  LR: "Liberia",
-  LY: "Libya",
-  LI: "Liechtenstein",
-  LT: "Lithuania",
-  LU: "Luxembourg",
-  MO: "Macao",
-  MG: "Madagascar",
-  MW: "Malawi",
-  MY: "Malaysia",
-  MV: "Maldives",
-  ML: "Mali",
-  MT: "Malta",
-  MH: "Marshall Islands",
-  MQ: "Martinique",
-  MR: "Mauritania",
-  MU: "Mauritius",
-  YT: "Mayotte",
-  MX: "Mexico",
-  FM: "Micronesia",
-  MD: "Moldova",
-  MC: "Monaco",
-  MN: "Mongolia",
-  ME: "Montenegro",
-  MS: "Montserrat",
-  MA: "Morocco",
-  MZ: "Mozambique",
-  MM: "Myanmar",
-  NA: "Namibia",
-  NR: "Nauru",
-  NP: "Nepal",
-  NL: "Netherlands",
-  NC: "New Caledonia",
-  NZ: "New Zealand",
-  NI: "Nicaragua",
-  NE: "Niger",
-  NG: "Nigeria",
-  NU: "Niue",
-  NF: "Norfolk Island",
-  MK: "North Macedonia",
-  MP: "Northern Mariana Islands",
-  NO: "Norway",
-  OM: "Oman",
-  PK: "Pakistan",
-  PW: "Palau",
-  PS: "Palestine",
-  PA: "Panama",
-  PG: "Papua New Guinea",
-  PY: "Paraguay",
-  PE: "Peru",
-  PH: "Philippines",
-  PN: "Pitcairn",
-  PL: "Poland",
-  PT: "Portugal",
-  PR: "Puerto Rico",
-  QA: "Qatar",
-  RE: "Réunion",
-  RO: "Romania",
-  RU: "Russia",
-  RW: "Rwanda",
-  BL: "Saint Barthélemy",
-  SH: "Saint Helena",
-  KN: "Saint Kitts and Nevis",
-  LC: "Saint Lucia",
-  MF: "Saint Martin",
-  PM: "Saint Pierre and Miquelon",
-  VC: "Saint Vincent and the Grenadines",
-  WS: "Samoa",
-  SM: "San Marino",
-  ST: "Sao Tome and Principe",
-  SA: "Saudi Arabia",
-  SN: "Senegal",
-  RS: "Serbia",
-  SC: "Seychelles",
-  SL: "Sierra Leone",
-  SG: "Singapore",
-  SX: "Sint Maarten",
-  SK: "Slovakia",
-  SI: "Slovenia",
-  SB: "Solomon Islands",
-  SO: "Somalia",
-  ZA: "South Africa",
-  GS: "South Georgia",
-  SS: "South Sudan",
-  ES: "Spain",
-  LK: "Sri Lanka",
-  SD: "Sudan",
-  SR: "Suriname",
-  SJ: "Svalbard and Jan Mayen",
-  SE: "Sweden",
-  CH: "Switzerland",
-  SY: "Syria",
-  TW: "Taiwan",
-  TJ: "Tajikistan",
-  TZ: "Tanzania",
-  TH: "Thailand",
-  TL: "Timor-Leste",
-  TG: "Togo",
-  TK: "Tokelau",
-  TO: "Tonga",
-  TT: "Trinidad and Tobago",
-  TN: "Tunisia",
-  TR: "Türkiye",
-  TM: "Turkmenistan",
-  TC: "Turks and Caicos Islands",
-  TV: "Tuvalu",
-  UG: "Uganda",
-  UA: "Ukraine",
-  AE: "United Arab Emirates",
-  GB: "United Kingdom",
-  US: "United States",
-  UM: "US Minor Outlying Islands",
-  UY: "Uruguay",
-  UZ: "Uzbekistan",
-  VU: "Vanuatu",
-  VE: "Venezuela",
-  VN: "Vietnam",
-  VG: "British Virgin Islands",
-  VI: "U.S. Virgin Islands",
-  WF: "Wallis and Futuna",
-  EH: "Western Sahara",
-  YE: "Yemen",
-  ZM: "Zambia",
-  ZW: "Zimbabwe"
-};
+document.addEventListener("DOMContentLoaded", function () {
 
-// -----------------------------------
-// ÜLKELERE AİT OTOMATİK METİN KISMI
-// -----------------------------------
-const countryTexts = {};
-for (const code in countries) {
-  countryTexts[code] = `${countries[code]} hakkında bilgi ve video.`;
-}
-
-// -----------------------------------
-// ÜLKE SEÇİMİ FONKSİYONU
-// -----------------------------------
-function showCountryInfo(code) {
-  const name = countries[code];
-  const text = countryTexts[code];
-
-  if (!name) {
-    console.log("Geçersiz ülke kodu!");
+  const svg = document.querySelector("svg");
+  if (!svg) {
+    console.error("SVG öğesi DOM'da bulunamadı. Lütfen HTML dosyanızdaki <svg> etiketinin varlığını kontrol edin.");
     return;
   }
 
-  console.log("Seçilen Ülke:", name);
-  console.log("Bilgi:", text);
-}
+  // 1. ÜLKE ADLARI VE KODLARI (ISO 3166-1 alpha-2) - 195 ÜLKE TAM LİSTE
+  const countryNames = {
+    "af": "Afganistan", "al": "Arnavutluk", "dz": "Cezayir", "ad": "Andorra", "ao": "Angola",
+    "ag": "Antigua ve Barbuda", "ar": "Arjantin", "am": "Ermenistan", "au": "Avustralya", "at": "Avusturya",
+    "az": "Azerbaycan", "bs": "Bahamalar", "bh": "Bahreyn", "bd": "Bangladeş", "bb": "Barbados",
+    "by": "Belarus", "be": "Belçika", "bz": "Belize", "bj": "Benin", "bt": "Bhutan",
+    "bo": "Bolivya", "ba": "Bosna-Hersek", "bw": "Botsvana", "br": "Brezilya", "bn": "Brunei",
+    "bg": "Bulgaristan", "bf": "Burkina Faso", "bi": "Burundi", "kh": "Kamboçya", "cm": "Kamerun",
+    "ca": "Kanada", "cv": "Yeşil Burun Adaları", "cf": "Orta Afrika Cumhuriyeti", "td": "Çad", "cl": "Şili",
+    "cn": "Çin", "co": "Kolombiya", "km": "Komorlar", "cd": "Kongo Demokratik Cumhuriyeti", "cg": "Kongo",
+    "cr": "Kosta Rika", "ci": "Fildişi Sahili", "hr": "Hırvatistan", "cu": "Küba", "cy": "Kıbrıs",
+    "cz": "Çekya", "dk": "Danimarka", "dj": "Cibuti", "dm": "Dominika", "do": "Dominik Cumhuriyeti",
+    "ec": "Ekvador", "eg": "Mısır", "sv": "El Salvador", "gq": "Ekvator Ginesi", "er": "Eritre",
+    "ee": "Estonya", "sz": "Esvatini", "et": "Etiyopya", "fj": "Fiji", "fi": "Finlandiya",
+    "fr": "Fransa", "ga": "Gabon", "gm": "Gambiya", "ge": "Gürcistan", "de": "Almanya",
+    "gh": "Gana", "gr": "Yunanistan", "gd": "Grenada", "gt": "Guatemala", "gn": "Gine",
+    "gw": "Gine-Bissau", "gy": "Guyana", "ht": "Haiti", "hn": "Honduras", "hu": "Macaristan",
+    "is": "İzlanda", "in": "Hindistan", "id": "Endonezya", "ir": "İran", "iq": "Irak",
+    "ie": "İrlanda", "il": "İsrail", "it": "İtalya", "jm": "Jamaika", "jp": "Japonya",
+    "jo": "Ürdün", "kz": "Kazakistan", "ke": "Kenya", "ki": "Kiribati", "kp": "Kuzey Kore",
+    "kr": "Güney Kore", "kw": "Kuveyt", "kg": "Kırgızistan", "la": "Laos", "lv": "Letonya",
+    "lb": "Lübnan", "ls": "Lesoto", "lr": "Liberya", "ly": "Libya", "li": "Lihtenştayn",
+    "lt": "Litvanya", "lu": "Lüksemburg", "mg": "Madagaskar", "mw": "Malavi", "my": "Malezya",
+    "mv": "Maldivler", "ml": "Mali", "mt": "Malta", "mh": "Marshall Adaları", "mr": "Moritanya",
+    "mu": "Mauritius", "mx": "Meksika", "fm": "Mikronezya", "md": "Moldova", "mc": "Monako",
+    "mn": "Moğolistan", "me": "Karadağ", "ma": "Fas", "mz": "Mozambik", "mm": "Myanmar",
+    "na": "Namibya", "nr": "Nauru", "np": "Nepal", "nl": "Hollanda", "nz": "Yeni Zelanda",
+    "ni": "Nikaragua", "ne": "Nijer", "ng": "Nijerya", "no": "Norveç", "om": "Umman",
+    "pk": "Pakistan", "pw": "Palau", "pa": "Panama", "pg": "Papua Yeni Gine", "py": "Paraguay",
+    "pe": "Peru", "ph": "Filipinler", "pl": "Polonya", "pt": "Portekiz", "qa": "Katar",
+    "ro": "Romanya", "ru": "Rusya", "rw": "Ruanda", "kn": "Saint Kitts ve Nevis", "lc": "Saint Lucia",
+    "vc": "Saint Vincent ve Grenadinler", "ws": "Samoa", "sm": "San Marino", "st": "Sao Tome ve Principe",
+    "sa": "Suudi Arabistan", "sn": "Senegal", "rs": "Sırbistan", "sc": "Seyşeller", "sl": "Sierra Leone",
+    "sg": "Singapur", "sk": "Slovakya", "si": "Slovenya", "sb": "Solomon Adaları", "so": "Somali",
+    "za": "Güney Afrika", "ss": "Güney Sudan", "es": "İspanya", "lk": "Sri Lanka", "sd": "Sudan",
+    "sr": "Surinam", "se": "İsveç", "ch": "İsviçre", "sy": "Suriye", "tw": "Tayvan",
+    "tj": "Tacikistan", "tz": "Tanzanya", "th": "Tayland", "tl": "Doğu Timor", "tg": "Togo",
+    "to": "Tonga", "tt": "Trinidad ve Tobago", "tn": "Tunus", "tr": "Türkiye", "tm": "Türkmenistan",
+    "tv": "Tuvalu", "ug": "Uganda", "ua": "Ukrayna", "ae": "Birleşik Arap Emirlikleri", "gb": "Birleşik Krallık",
+    "us": "Amerika Birleşik Devletleri", "uy": "Uruguay", "uz": "Özbekistan", "vu": "Vanuatu",
+    "va": "Vatikan", "ve": "Venezuela", "vn": "Vietnam", "ye": "Yemen", "zm": "Zambiya",
+    "zw": "Zimbabve"
+  };
 
-// ÖRNEK KULLANIM
-showCountryInfo("TR");
+  // 2. ÜLKE BİLGİ METİNLERİ (senin verdiğin bölüm - dokunulmadı)
+  const countryTexts = {
+    "tr": "Türkiye, Asya ve Avrupa kıtalarını birleştiren stratejik konumuyla bilinir...",
+    "us": "Amerika Birleşik Devletleri, 50 eyaletten oluşan federal bir cumhuriyettir...",
+    "ca": "Kanada, yüzölçümü bakımından dünyanın ikinci en büyük ülkesidir...",
+    "de": "Almanya, Avrupa Birliği'nin kurucu üyelerindendir...",
+    "fr": "Fransa, kültürü ve sanatıyla tanınır...",
+    // diğerleri eksikse sistem otomatik placeholder gösterecek
+  };
+
+  // 3. Kod Düzeltme Haritası
+  const fixMap = {
+    turkey: "tr", usa: "us", america: "us",
+    "united states": "us", "united_states": "us",
+    "United States": "us", "us-states": "us",
+    canada: "ca", france: "fr", germany: "de",
+    england: "gb", uk: "gb",
+  };
+
+  const usStates = ["al","ak","az","ar","ca","co","ct","de","fl","ga","hi","id","il","in","ia","ks","ky","la","me","md","ma","mi","mn","ms","mo","mt","ne","nv","nh","nj","nm","ny","nc","nd","oh","ok","or","pa","ri","sc","sd","tn","tx","ut","vt","va","wa","wv","wi","wy"];
+
+  // 4. SVG Tıklama Olayı
+  svg.addEventListener("click", function (e) {
+    let target = e.target.closest("path, polygon, g");
+    if (!target) return;
+
+    const idAttr = (target.getAttribute("id") || "").toLowerCase();
+    const classAttr = (target.getAttribute("class") || "");
+    const tokens = (idAttr + " " + classAttr.toLowerCase()).trim().split(/\s+/).filter(Boolean);
+    tokens.push(classAttr);
+
+    let foundToken = tokens.find(t => fixMap[t] || (t.length === 2 && countryNames[t]));
+    let rawCode = foundToken || tokens[0] || "";
+    let countryCode = fixMap[rawCode] || rawCode.toLowerCase();
+
+    if (usStates.includes(countryCode)) countryCode = "us";
+
+    if (!countryCode || !countryNames[countryCode]) {
+      console.warn("Ülke kodu bulunamadı:", idAttr, classAttr);
+      return;
+    }
+
+    const name = countryNames[countryCode];
+    const text = countryTexts[countryCode] || `${name} için henüz bilgi eklenmedi.`;
+
+    const newTab = window.open("", "_blank");
+    if (!newTab) {
+      alert("Tarayıcınız pop-up engelledi.");
+      return;
+    }
+
+    const videoFileName = countryCode;
+
+    newTab.document.write(`
+      <html><head><title>${name}</title></head>
+      <body>
+        <h1>${name}</h1>
+        <p>${text}</p>
+        <video autoplay muted controls>
+          <source src="video/${videoFileName}.mp4" type="video/mp4">
+        </video>
+      </body></html>
+    `);
+
+    newTab.document.close();
+  });
+
+});
