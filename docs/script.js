@@ -3,21 +3,78 @@ document.addEventListener("DOMContentLoaded", function () {
   const svg = document.querySelector("svg");
   if (!svg) return;
 
-  // 1. TIKLAMAYI ZORLA AÇ
+  // ============================================================
+  //  1. CSS STİLLERİ VE MODAL YAPISI EKLE
+  // ============================================================
+
+  const modalHTML = `
+    <div id="country-modal" style="
+        display: none; position: fixed; z-index: 1000; left: 0; top: 0; 
+        width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+    ">
+        <div id="modal-content" style="
+            background-color: #fefefe; margin: 10% auto; padding: 20px; 
+            border: 1px solid #888; width: 80%; max-width: 600px; 
+            border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        ">
+            <span id="close-modal" style="
+                color: #aaa; float: right; font-size: 28px; font-weight: bold;
+                cursor: pointer;
+            ">&times;</span>
+            <h2 id="modal-title" style="color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px;"></h2>
+            <p id="modal-text" style="font-size: 16px; line-height: 1.6; color: #333;"></p>
+            <video id="modal-video" autoplay muted controls width="100%" style="
+                margin-top: 15px; border-radius: 5px; background: #000;
+            ">
+                <source id="video-source" src="" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor.
+            </video>
+        </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+  const modal = document.getElementById('country-modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalText = document.getElementById('modal-text');
+  const videoSource = document.getElementById('video-source');
+  const modalVideo = document.getElementById('modal-video');
+  const closeModal = document.getElementById('close-modal');
+
+  // Kapatma Fonksiyonları
+  closeModal.onclick = function() {
+    modal.style.display = "none";
+    modalVideo.pause();
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      modalVideo.pause();
+    }
+  }
+
+  // ============================================================
+  //  2. TIKLANABİLİRLİK ZORLAMASI
+  // ============================================================
+
+  // Tıklamayı zorla aç
   svg.querySelectorAll("*").forEach(el => {
       el.style.pointerEvents = "all";
       el.style.cursor = "pointer";
   });
 
-  // 2. ENGEL OLABİLECEK ŞEFFAF KATLARI DEVRE DIŞI BIRAK
+  // Engel olabilecek şeffaf katmanları devre dışı bırak
   document.querySelectorAll("svg rect, svg defs, svg g[opacity='0'], svg [fill='none'], svg [fill='transparent']")
     .forEach(el => {
         el.style.pointerEvents = "none";
     });
 
   // ============================================================
-  //  ÜLKE İSİMLERİ (TÜM LİSTE TAMAMLANDI)
+  //  3. ÜLKE BİLGİLERİ (TÜM LİSTE TAMAMLANDI)
   // ============================================================
+
   const countryNames = {
     af:"Afganistan", al:"Arnavutluk", dz:"Cezayir", ad:"Andorra", ao:"Angola",
     ag:"Antigua ve Barbuda", ar:"Arjantin", am:"Ermenistan", au:"Avustralya",
@@ -26,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
     bj:"Benin", bt:"Bhutan", bo:"Bolivya", ba:"Bosna-Hersek", bw:"Botsvana",
     br:"Brezilya", bn:"Brunei", bg:"Bulgaristan", bf:"Burkina Faso",
     bi:"Burundi", kh:"Kamboçya", cm:"Kamerun", ca:"Kanada", cv:"Yeşil Burun",
-    cf:"Orta Afrika Cum.", td:"Çad", cl:"Şili", cn:"Çin", co:"Kolombiya",
-    km:"Komorlar", cd:"Kongo DC", cg:"Kongo Cum.", cr:"Kosta Rika",
+    cf:"Orta Afrika Cumhuriyeti", td:"Çad", cl:"Şili", cn:"Çin", co:"Kolombiya",
+    km:"Komorlar", cd:"Kongo Demokratik Cumhuriyeti", cg:"Kongo Cumhuriyeti", cr:"Kosta Rika",
     ci:"Fildişi Sahili", hr:"Hırvatistan", cu:"Küba", cy:"Kıbrıs", cz:"Çekya",
-    dk:"Danimarka", dj:"Cibuti", dm:"Dominika", do:"Dominik Cum.",
+    dk:"Danimarka", dj:"Cibuti", dm:"Dominika", do:"Dominik Cumhuriyeti",
     ec:"Ekvador", eg:"Mısır", sv:"El Salvador", gq:"Ekvator Ginesi",
     er:"Eritre", ee:"Estonya", sz:"Esvatini", et:"Etiyopya", fj:"Fiji",
     fi:"Finlandiya", fr:"Fransa", ga:"Gabon", gm:"Gambiya", ge:"Gürcistan",
@@ -52,23 +109,20 @@ document.addEventListener("DOMContentLoaded", function () {
     pe:"Peru", ph:"Filipinler", pl:"Polonya", pt:"Portekiz", qa:"Katar",
     ro:"Romanya", ru:"Rusya", rw:"Ruanda", kn:"Saint Kitts ve Nevis",
     lc:"Saint Lucia", vc:"Saint Vincent", ws:"Samoa", sm:"San Marino",
-    st:"Sao Tome", sa:"Suudi Arabistan", sn:"Senegal", rs:"Sırbistan",
+    st:"Sao Tome ve Principe", sa:"Suudi Arabistan", sn:"Senegal", rs:"Sırbistan",
     sc:"Seyşeller", sl:"Sierra Leone", sg:"Singapur", sk:"Slovakya",
     si:"Slovenya", sb:"Solomon Adaları", so:"Somali", za:"Güney Afrika",
     ss:"Güney Sudan", es:"İspanya", lk:"Sri Lanka", sd:"Sudan",
     sr:"Surinam", se:"İsveç", ch:"İsviçre", sy:"Suriye", tw:"Tayvan",
     tj:"Tacikistan", tz:"Tanzanya", th:"Tayland", tl:"Doğu Timor",
-    tg:"Togo", to:"Tonga", tt:"Trinidad Tobago", tn:"Tunus",
+    tg:"Togo", to:"Tonga", tt:"Trinidad ve Tobago", tn:"Tunus",
     tr:"Türkiye", tm:"Türkmenistan", tv:"Tuvalu", ug:"Uganda",
-    ua:"Ukrayna", ae:"BAE", gb:"Birleşik Krallık", us:"ABD",
+    ua:"Ukrayna", ae:"Birleşik Arap Emirlikleri", gb:"Birleşik Krallık", us:"Amerika Birleşik Devletleri",
     uy:"Uruguay", uz:"Özbekistan", vu:"Vanuatu", va:"Vatikan",
     ve:"Venezuela", vn:"Vietnam", ye:"Yemen", zm:"Zambiya",
     zw:"Zimbabve"
   };
 
-  // ============================================================
-  //  ÜLKE METİNLERİ (TÜM LİSTE TAMAMLANDI)
-  // ============================================================
   const countryTexts = {
     af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır.",
     al:"Arnavutluk: Balkan folkloru ve sıcak kültürel yapısıyla bilinir.",
@@ -102,14 +156,14 @@ document.addEventListener("DOMContentLoaded", function () {
     cm:"Kamerun: 'Mini Afrika' olarak adlandırılan kültürel ve coğrafi çeşitliliğe sahiptir.",
     ca:"Kanada: Çeşitli etnik kökenlere sahip, geniş doğal alanlara ve iki resmi dile (İngilizce ve Fransızca) sahip bir ülkedir.",
     cv:"Yeşil Burun: Portekiz ve Afrika kültürlerinin harmanlandığı Morna müziğiyle ünlüdür.",
-    cf:"Orta Afrika Cum.: Yoğun ormanları ve el sanatlarıyla dikkat çeker.",
+    cf:"Orta Afrika Cumhuriyeti: Yoğun ormanları ve el sanatlarıyla dikkat çeker.",
     td:"Çad: Sahra Çölü kültürü ve göçebe yaşam tarzının yaygın olduğu bir ülkedir.",
     cl:"Şili: Uzun, dar coğrafyası, And Dağları ve köklü şarap üretimiyle tanınır.",
     cn:"Çin: Binlerce yıllık tarihi, Konfüçyüs felsefesi ve geleneksel tıbbıyla ünlüdür.",
     co:"Kolombiya: Latin Amerika edebiyatı, kahvesi ve salsa dansıyla bilinir.",
     km:"Komorlar: Hint Okyanusu'nda yer alan, Arap ve Afrika kültürlerinin izlerini taşıyan volkanik bir adalar ülkesidir.",
-    cd:"Kongo DC: Afrika'nın en büyük ikinci ülkesi, Soukous müziği ve doğal kaynaklarıyla tanınır.",
-    cg:"Kongo Cum.: Tropikal ormanları ve geleneksel Pygme topluluklarıyla bilinir.",
+    cd:"Kongo Demokratik Cumhuriyeti: Afrika'nın en büyük ikinci ülkesi, Soukous müziği ve doğal kaynaklarıyla tanınır.",
+    cg:"Kongo Cumhuriyeti: Tropikal ormanları ve geleneksel Pygme topluluklarıyla bilinir.",
     cr:"Kosta Rika: Biyoçeşitliliği, 'Pura Vida' yaşam felsefesi ve ordusuz bir ülke olmasıyla öne çıkar.",
     ci:"Fildişi Sahili: Kakao ve kahve üretimiyle ünlü, zengin bir Batı Afrika kültürüne sahiptir.",
     hr:"Hırvatistan: Adriyatik kıyıları, tarihi şehirleri ve Slav kültürüyle tanınır.",
@@ -119,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dk:"Danimarka: Viking mirası, modern tasarım ve 'hygge' (rahatlık) yaşam tarzıyla bilinir.",
     dj:"Cibuti: Kızıldeniz ticaret yollarının üzerinde stratejik bir konuma sahiptir.",
     dm:"Dominika: 'Karayiplerin Doğal Adası' olarak bilinir, volkanik ve ormanlık yapısıyla öne çıkar.",
-    do:"Dominik Cum.: Beisbol, merengue ve bachata dansları ile Karayip turizminin merkezlerindendir.",
+    do:"Dominik Cumhuriyeti: Beisbol, merengue ve bachata dansları ile Karayip turizminin merkezlerindendir.",
     ec:"Ekvador: Ekvator çizgisi üzerinde yer alır, Galapagos Adaları ve And medeniyetleriyle tanınır.",
     eg:"Mısır: Piramitler, Nil Nehri ve köklü Antik Mısır tarihiyle dünyanın dikkatini çeker.",
     sv:"El Salvador: Orta Amerika'da yer alır, volkanik manzaralar ve kahve üretimiyle bilinir.",
@@ -218,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     vc:"Saint Vincent: Volkanik adası, Karayip korsanlarının tarihi ve doğal güzellikleriyle tanınır.",
     ws:"Samoa: Polinezya kültürüne sahip, Pasifik'te yer alan bir adalar ülkesidir.",
     sm:"San Marino: İtalya'nın içinde yer alan dünyanın en eski cumhuriyetlerinden biri olduğu iddia edilir.",
-    st:"Sao Tome: Afrika'nın batı kıyısında, Ekvator üzerinde yer alan küçük bir adalar ülkesidir.",
+    st:"Sao Tome ve Principe: Afrika'nın batı kıyısında, Ekvator üzerinde yer alan küçük bir adalar ülkesidir.",
     sa:"Suudi Arabistan: İslam'ın kutsal şehirlerine ev sahipliği yapan, petrol zengini Arap bir krallıktır.",
     sn:"Senegal: Batı Afrika'da Fransızca konuşan, zengin müzik ve moda kültürüyle bilinen bir ülkedir.",
     rs:"Sırbistan: Balkanlar'da yer alır, güçlü Ortodoks kültürü ve nehirlere kıyısı olan başkentiyle öne çıkar.",
@@ -245,16 +299,16 @@ document.addEventListener("DOMContentLoaded", function () {
     tl:"Doğu Timor: Güneydoğu Asya'nın en yeni ülkelerinden biri, Portekiz ve Endonezya etkilerini taşır.",
     tg:"Togo: Batı Afrika'da yer alır, geleneksel Vudu ve Ewe kültürüyle dikkat çeker.",
     to:"Tonga: Polinezya'nın tek yerli krallığı, Pasifik Okyanusu'nda yer alır.",
-    tt:"Trinidad Tobago: Karayip karnavalı, calypso müziği ve petrol/gaz kaynaklarıyla tanınır.",
+    tt:"Trinidad ve Tobago: Karayip karnavalı, calypso müziği ve petrol/gaz kaynaklarıyla tanınır.",
     tn:"Tunus: Antik Kartaca'nın bulunduğu Kuzey Afrika ülkesi, Akdeniz kıyısıyla ünlüdür.",
     tr:"Türkiye: Asya ve Avrupa'yı birleştiren, zengin tarihi ve kültürel çeşitliliğe sahip bir ülkedir.",
     tm:"Türkmenistan: Orta Asya'da yer alır, gaz rezervleri ve göçebe Türkmen kültürüyle bilinir.",
     tv:"Tuvalu: Pasifik'te yer alan, deniz seviyesinin yükselmesi tehlikesiyle karşı karşıya olan küçük bir ada ülkesidir.",
     ug:"Uganda: Afrika'nın Büyük Göller bölgesinde yer alır, şempanze ve goril yaşam alanlarıyla dikkat çeker.",
     ua:"Ukrayna: Doğu Avrupa'nın en büyük ülkelerinden biri, zengin Slav kültürü ve tarihiyle bilinir.",
-    ae:"BAE: Dubai ve Abu Dabi gibi modern şehirleriyle, petrol zengini, turizm ve finans merkezidir.",
+    ae:"Birleşik Arap Emirlikleri: Dubai ve Abu Dabi gibi modern şehirleriyle, petrol zengini, turizm ve finans merkezidir.",
     gb:"Birleşik Krallık: İngiliz İmparatorluğu'nun mirası, Kraliyet ailesi, Shakespeare ve küresel finans merkezi olarak tanınır.",
-    us:"ABD: Dünya gücü, çok kültürlü yapısı, Hollywood ve teknoloji endüstrileriyle öne çıkar.",
+    us:"Amerika Birleşik Devletleri: Dünya gücü, çok kültürlü yapısı, Hollywood ve teknoloji endüstrileriyle öne çıkar.",
     uy:"Uruguay: Güney Amerika'nın en demokratik ve sosyal açıdan gelişmiş ülkelerinden biridir.",
     uz:"Özbekistan: İpekyolu'nun merkezi şehirleri (Semerkant, Buhara) ile bilinen Orta Asya ülkesidir.",
     vu:"Vanuatu: Pasifik'te yer alan volkanik adalar ülkesi, kabile kültürü ve dalış turizmiyle öne çıkar.",
@@ -266,9 +320,6 @@ document.addEventListener("DOMContentLoaded", function () {
     zw:"Zimbabve: Shona kültürü ve geleneksel müziğiyle dikkat çeker."
   };
 
-  // ============================================================
-  //  OTO-DÜZELTME
-  // ============================================================
   const fixMap = {
     turkey:"tr", usa:"us", america:"us",
     france:"fr", germany:"de",
@@ -276,13 +327,13 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // ============================================================
-  //  TIKLAMA SİSTEMİ
+  //  4. TIKLAMA SİSTEMİ (MODAL GÖSTERİMİ)
   // ============================================================
   svg.addEventListener("click", function(e){
 
     const real = document.elementFromPoint(e.clientX, e.clientY);
     const target = real.closest("path, polygon, g");
-    if (!target) return;
+    if (!target) return; // Geçerli bir SVG ülke öğesi değilse dur
 
     const idAttr = (target.getAttribute("id") || "").toLowerCase();
     const classAttr = (target.getAttribute("class") || "").toLowerCase();
@@ -292,40 +343,31 @@ document.addEventListener("DOMContentLoaded", function () {
     let rawCode = found || tokens[0] || "";
     let countryCode = fixMap[rawCode] || rawCode;
 
-    const name = countryNames[countryCode] || countryCode.toUpperCase();
-    const text = countryTexts[countryCode] || "Bu ülke için metin eklenmemiş.";
+    // Ülke kodu bulunamazsa veya geçerli bir kod değilse bir uyarı verilebilir
+    if (!countryNames[countryCode]) {
+        console.warn(`Ülke kodu bulunamadı veya eşleştirilemedi: ${countryCode}`);
+        return;
+    }
 
-    // ============================================================
-    //  YENİ SEKME AÇ — VİDEO DA EKLİ
-    // ============================================================
-    const win = window.open("", "_blank");
+    const name = countryNames[countryCode];
+    const text = countryTexts[countryCode] || "Bu ülke için metin henüz eklenmemiş.";
+    
+    // Modal içeriğini doldur ve göster
+    modalTitle.textContent = name;
+    modalText.textContent = text;
+    
+    // Video kaynağını güncelle ve videoyu tekrar yükle
+    videoSource.src = `video/${countryCode}.mp4`;
+    modalVideo.load();
+    
+    // Otomatik oynatmayı (autoplay) sağlamak için:
+    modalVideo.play().catch(error => {
+        // Otomatik oynatma hatası (genellikle sesli olduğu için tarayıcılar engeller)
+        console.log("Video otomatik oynatılamadı, manuel başlatılması gerekebilir.", error);
+    });
 
-    win.document.write(`
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>${name}</title>
-        <style>
-          body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-          h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
-          video { display: block; max-width: 100%; height: auto; margin-top: 20px; border: 1px solid #ddd; }
-        </style>
-      </head>
-      <body>
-        <h1>${name}</h1>
-        <p style="font-size:18px;">${text}</p>
+    modal.style.display = "block"; // Modalı göster
 
-        <video autoplay muted controls>
-          <source src="video/${countryCode}.mp4" type="video/mp4">
-          Tarayıcınız video etiketini desteklemiyor.
-        </video>
-
-      </body>
-      </html>
-    `);
-
-    // Yeni sekmenin document.write ile açılması modern tarayıcılarda sorun çıkarabilir.
-    // win.document.close();
   });
 
 });
