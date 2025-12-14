@@ -129,7 +129,45 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const countryTexts = {
-    af:"Afganistan: Zengin sözlü şiir ve misafirperverlik geleneği ile tanınır.",
+    af:"Afganistan: “Bağlantı Çeken Akşam”
+Kabil’in Dasht-e-Barchi bölgesinde, akşam karanlığı çökerken Faridi ailesinin evinde telefon ekranlarının soluk ışığı duvarlara vuruyordu. Elektrikler gün boyu birkaç kez gitmişti ama tam akşam yemeği öncesi gelmişti — ev halkı için artık normal bir rutin.
+Anne Şekibe mutfakta sıcak ekmekleri yerleştirirken bir yandan su ısıtıcısının fişini kontrol etti.
+“Çok çekiyor bu alet, yine sigortayı atmasın,” diye söylendi kendi kendine.
+O sırada on altı yaşındaki kızı Lema, avlunun bir köşesinde telefonunu havaya kaldırmış, daha iyi çekmesi için doğru noktayı arıyordu.
+“Anne! Bekle, videoyu indireyim de sonra sofraya gelirim. İki dakikalık şey ama yine dolmuyor!”
+Sesi hafif sinirliydi; internet gün içinde zaten neredeyse hiç çalışmamıştı.
+Küçük kardeşi Sami ise elindeki eski tabletle duvara yaslanmış “PUBG Mobile Lite” oynuyordu. İnternet yavaş olduğu için oyun sık sık donuyor, her donduğunda da Sami derin bir iç çekiyordu.
+Baba Latif kapıdan içeri girince önce çocuklara, sonra avluya yayılan ekran ışıklarına baktı.
+“Selamünaleyküm. Yine herkes telefonun içinde kaybolmuş.”
+Ama bu cümleyi kızgınlıkla değil, alışılmış bir tonda söyledi. Çünkü kendisi de sabah işe gitmeden önce haberleri telefonundan okuyordu; internet olunca dünyaya bağlanmak artık vazgeçilmezdi.
+Şekibe sofrayı hazırlarken Latif’e dönüp:
+“Bugün elektrik üç kere gitti ama çocuklar yine telefonları bırakmadı. Okul ödevlerini de telefondan yapıyorlar artık. Bizim zamanımızda defter kalem vardı sadece…” dedi.
+Latif gülümsedi.
+“Zaman değişti Şekibe. Hem ödevlerini yapsınlar da varsın telefonla olsun.”
+Sofra kurulduğunda internet yine bir süreliğine düzeldi. Bu kez Lema masaya otururken bile telefonunu bırakmadı; öğretmeninin gönderdiği PDF ödevini indiriyordu.
+Latif, “Kızım, bari yemek yerken kenara koy,” dese de Lema başını kaldırmadan,
+“Baba, birazdan yine gidecek. Şimdi indirmezsem sabaha kalır,” dedi.
+Sami ise tableti kapatıp iç geçirdi.
+“Yarın arkadaşlarla çevrim içi oynamak istiyorduk ama bizim internet böyle olursa nasıl olacak bilmiyorum.”
+Latif oğluna dönüp ses tonunu yumuşattı.
+“Bak oğlum, oyun iyidir ama fazla kaptırma kendini. Hem internet iyice hızlanınca oynarsın.”
+Yemek sırasında aile, telefondan kısa haber videolarını izleyip günün olaylarını konuştu. Bu Afganistan’da sık görülen bir alışkanlıktı; televizyonun yerini çoğu evde akıllı telefon çoktan almıştı.
+Yemekten sonra Şekibe çay koydu. Lema ise sosyal medyada yavaşça yüklenen fotoğraflara bakıp arkadaşlarına mesaj yazıyordu.
+“Anne, bak Zohra yeni telefon almış… Kamerası çok iyi,” dedi.
+Şekibe başını salladı.
+“Kızım, bizim önce kira parasını düşünmemiz lazım. Telefon sonra gelir.”
+Lema telefonu sessize aldı ama gözleri hâlâ ekrandaydı; hayalleri, bağlantı hızından daha genişti.
+Baba Latif çayını karıştırırken hafifçe gülümsedi.
+“Biz eskiden akşamları radyo dinlerdik. Şimdi siz dünyayı ceplerinizde taşıyorsunuz.”
+Lema babasına baktı, kendi de gülümsedi.
+“Baba, radyo zamanı daha güzelmiş belki ama… şimdi de herkes birbirine daha yakın. İnternet çektiği kadarıyla…”
+Tam bu sırada ışıklar hafifçe titredi, ardından internet tekrar koptu. Ev bir anda sessizliğe büründü.
+Sami tabletini yere bıraktı, Lema telefonu kapattı. Şekibe’nin yüzünde hafif bir rahatlama belirdi.
+“Eh, herkes biraz gözünü dinlendirsin. Biraz da birbirimizle konuşalım.”
+Bu kez itiraz eden olmadı.
+Avluda, loş ampulün altında aile çaylarını yudumlarken günlük hayatın telaşı, teknolojinin hızına yetişemeyen bağlantılar ve yavaşça yüklenen videolar bir süreliğine unutuldu.
+Telefonlar sessizdi ama sohbet ilk defa günün en güçlü bağlantısı olmuştu.
+",
     al:"Arnavutluk: Balkan folkloru ve sıcak kültürel yapısıyla bilinir.",
     dz:"Cezayir: Berberi ve Arap kültürünün birleştiği köklü bir mirasa sahiptir.",
     ad:"Andorra: Pirene dağ kültürü ve küçük topluluk gelenekleriyle ünlüdür.",
@@ -375,3 +413,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
